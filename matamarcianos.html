@@ -14,6 +14,7 @@
 
         <a-plane position="0 1 -10" width="10" height="20" rotation="-90 0" color="#CCC"></a-plane>
 
+
         <a-box id="caja" position="0 1.5 -20" color="green"
             animation="property: position; to: 0 1.5 0; dur: 3000; easing: linear;"
             >
@@ -21,21 +22,27 @@
 
         <a-camera>
             <a-cursor></a-cursor>
+
+            <a-text value="5" id="vida" color="red" position="2.8 1.4 -2"></a-text>
         </a-camera>
     </a-scene>
 
     <script>
-        document.getElementById("caja").addEventListener("mouseenter",function(event){
+        var caja = document.getElementById("caja");
+
+        caja.addEventListener("mouseenter",function(event){
             event.target.setAttribute("color","red");
         });
 
-        document.getElementById("caja").addEventListener("mouseleave",function(event){
+        caja.addEventListener("mouseleave",function(event){
             event.target.setAttribute("color","green");
         });
 
-        document.getElementById("caja").addEventListener("click",function(event){
-            event.target.setAttribute("color","blue");
+        caja.addEventListener("click",function(event){
+            this.remove();
         });
+
+
     </script>
 </body>
 
