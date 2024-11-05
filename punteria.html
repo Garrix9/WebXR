@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<head>
+    <script src="./js/aframe.min.js"></script>
+    <script src="./js/aframe-environment-component.min.js"></script>
+</head>
+
+<body>
+    <a-scene id="scene" obb-collider="showColliders: false">
+        <a-assets>
+            <a-asset.item id="portal-obj" src="./obj/portal.obj"></a-asset.item>
+            <a-asset.item id="portal-mtl" src="./obj/portal.mtl"></a-asset.item>
+            <a-asset-item id="portal-glb" src="./obj/portal.glb"></a-asset-item>
+            <a-asset-item id="portal-gltf" src="./obj/portal2.gltf"></a-asset-item>
+        </a-assets>
+
+        <a-entity environment="preset: dream"></a-entity>
+
+        <a-light type="ambient" color="#fff" position="0 0 0"></a-light>
+
+        <a-plane position="0 1 -10" width="10" height="20" rotation="-90 0" color="#CCC"></a-plane>
+
+        <a-box id="caja" position="-2 1.5 -20" color="green" obb-collider
+            animation="property: position; to: 0 1.5 0; dur: 3000; easing: linear;"
+            >
+        </a-box>
+        <a-entity gltf-model="#portal-glb" position="0 -0.01 -20" rotation="0 90 0"></a-entity>
+        <!-- <a-entity obj-model="obj: #portal-obj; mtl: #portal-mtl" position="0 -0.01 -10" rotation="0 90 0"></a-entity> -->
+
+        <a-camera obb-collider id="camara" wasd-controls-enabled="false">
+            <a-cursor ></a-cursor>
+
+            <a-text value="1" id="vida" color="red" position="1 1.4 -2">
+            </a-text>
+        </a-camera>
+    </a-scene>
+
+    <script>
+        var enemigo = document.getElementById("caja");
+        var camara = document.getElementById("camara");
+        var vida = document.getElementById("vida");
+
+        const scene = document.querySelector("a-scene");
+
+        var velocidad = 3000;
+        var x = 0;
+        var position;
+
+        var entityEl = document.createElement('a-entity');
+
+        enemigo.addEventListener("mouseenter",function(event){
+            event.target.setAttribute("color","red");
+        });
+
+        enemigo.addEventListener("mouseleave",function(event){
+            event.target.setAttribute("color","green");
+        });
+
+        enemigo.addEventListener("click",function(event){
+            this.remove();
+
+            createCube();
+        });
+
+        camara.addEventListener("obbcollisionstarted", function(event){
+            vida.setAttribute("value", vida.getAttribute("value")-1);
+
+            scene.removeChild(enemigo)
+
+            if (vida.getAttribute("value")>0){
+                createCube();
+            } else {
+                vida.setAttribute("value", "HAS PERDIDO");
+                vida.setAttribute("position", "-0.681 0.124 -2");
+            }
+        });
+
+        <!-- ------------------------------- -->
+
+        var createCube = function(){
+            console.log("crea caja");
+
+            x = Math.floor(Math.random() * 10) -5;
+
+            enemigo = document.createElement("a-box");
+            velocidad -= 50;
+
+            enemigo.setAttribute("color", "green");
+            enemigo.setAttribute("obb-collider", "");
+            enemigo.setAttribute("position", x+" 1.5 -20");
+            enemigo.setAttribute("animation", "property: position; to: 0 1.5 0; dur: "+velocidad+"; easing: linear;");
+
+            enemigo.addEventListener("mouseenter",function(event){
+                event.target.setAttribute("color","red");
+            });
+
+            enemigo.addEventListener("mouseleave",function(event){
+                event.target.setAttribute("color","green");
+            });
+
+            enemigo.addEventListener("click",function(event){
+                this.remove();
+
+                createCube();
+            });
+
+            scene.appendChild(enemigo);
+        }
+    </script>
+</body>
+
+</html>

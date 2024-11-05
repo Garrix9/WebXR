@@ -1,0 +1,104 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v1.4.40",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                0
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "Fantasy Portal ",
+            "translation" : [
+                -1709.1358642578125,
+                88.31121826171875,
+                223.9280242919922
+            ]
+        }
+    ],
+    "materials" : [
+        {
+            "doubleSided" : true,
+            "name" : "Material",
+            "pbrMetallicRoughness" : {
+                "metallicFactor" : 0,
+                "roughnessFactor" : 0.4567100405693054
+            }
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Fantasy Portal Test",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1
+                    },
+                    "indices" : 2,
+                    "material" : 0
+                }
+            ]
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 412257,
+            "max" : [
+                99.08316040039062,
+                138.28781127929688,
+                95.83979797363281
+            ],
+            "min" : [
+                -98.9757080078125,
+                -91.13682556152344,
+                -102.22056579589844
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 412257,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5125,
+            "count" : 2473542,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 4947084,
+            "byteOffset" : 0
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 4947084,
+            "byteOffset" : 4947084
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 9894168,
+            "byteOffset" : 9894168
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 19788336,
+            "uri" : "fantasy portal  .bin"
+        }
+    ]
+}
