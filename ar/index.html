@@ -7,11 +7,12 @@
     <script src="https://cdn.rawgit.com/jeromeetienne/ar.js/1.7.7/aframe/build/aframe-ar.min.js"></script>
     <title>Document</title>
 </head>
-<body>
-    <a-scene embedded arjs>
+<body style="margin:0; overflow:hidden;">
+    <a-scene>
         <a-marker preset="hiro">
             <a-box position="0 0 -4" rotation="0 0 0" color="red"></a-box>
         </a-marker>
+        <a-entity camera></a-entity>
     </a-scene>
 </body>
 </html>
