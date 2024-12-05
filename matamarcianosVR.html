@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<head>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.3.3/dist/aframe-environment-component.min.js"></script>
+    
+</head>
+
+<body>
+    <a-scene obb-collider="showColliders: false">
+        <a-entity environment="preset: tron"></a-entity>
+
+        <a-light type="ambient" color="#fff" position="0 0 0"></a-light>
+
+        <a-plane position="0 1 -10" width="10" height="20" rotation="-90 0" color="#CCC"></a-plane>
+
+
+        <a-box id="caja" position="0 1.5 -20" color="red" obb-collider
+            animation="property: position; to: 0 1.5 0; dur: 3000; easing: linear;"
+            >
+        </a-box>
+
+        <a-entity oculus-touch-controls="hand: left"></a-entity>
+        <a-entity oculus-touch-controls="hand: right"
+        raycaster="showLine: true;
+        far:100; lineColor: red; lineOpacity:0.5"></a-entity>
+
+        <a-camera obb-collider id="camara">
+
+            <a-text value="5" id="vida" color="red" position="2.8 1.4 -2"></a-text>
+        </a-camera>
+    </a-scene>
+
+    <script>
+        var caja = document.getElementById("caja");
+        var camara = document.getElementById("camara");
+        var vida = document.getElementById("vida");
+
+        caja.addEventListener("mouseenter",function(event){
+            event.target.setAttribute("color","green");
+        });
+
+        caja.addEventListener("mouseleave",function(event){
+            event.target.setAttribute("color","red");
+        });
+
+        caja.addEventListener("click",function(event){
+            this.remove();
+        });
+
+        camara.addEventListener("obbcollisionstarted", function(event){
+            console.log("EVENTO");
+            vida.setAttribute("value", vida.getAttribute("value")-1);
+        });
+
+        /* Scripts VR */
+
+        caja.addEventListener("raycaste-intersected", function(event){
+            event.target.setAttribute("color", "green")
+        })
+
+        caja.addEventListener("raycaste-intersected-cleared", function(event){
+            event.target.setAttribute("color", "red")
+        })
+    </script>
+</body>
+
+</html>

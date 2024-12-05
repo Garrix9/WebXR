@@ -1,0 +1,92 @@
+<html>
+  <head>
+    <title>Solitario</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.1.0/dist/aframe-physics-system.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@^4.1.1/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-physics-extras/dist/aframe-physics-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.3.2/dist/aframe-environment-component.min.js"></script>
+    <script>
+      
+      // turn controller's physics presence on only while button held down
+      AFRAME.registerComponent('phase-shift', {
+        init: function () {
+          var el = this.el
+          el.addEventListener('gripdown', function () {
+            el.setAttribute('collision-filter', {collisionForces: true})
+          })
+          el.addEventListener('gripup', function () {
+            el.setAttribute('collision-filter', {collisionForces: false})
+          })
+        }
+      })
+
+      var cardNum = "";
+      let imageArray = new Array();
+      let newImage = new Image();
+
+      for (let index = 1; index < 54; index++) {
+        cardNum = "./img/cards/" + index + ".png";
+        newImage.src = cardNum;
+        imageArray.push(newImage);
+      }
+
+
+    </script>
+    <link rel="stylesheet" type="text/css" href="../assets/examples.css">
+  </head>
+
+  <body>
+    <a-scene physics environment="preset: default; shadow: true">
+      <a-assets>
+        <a-mixin id="card" geometry="primitive: plane; width: 0.33; height: 0.50;"
+                 hoverable grabbable stretchable draggable
+                 event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                 event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false"
+                 material="side: double"
+                 dynamic-body shadow></a-mixin>
+        <a-mixin id="touch"
+                 physics-collider phase-shift
+                 collision-filter="collisionForces: false"
+                 static-body="shape: sphere; sphereRadius: 0.02"
+                 super-hands="colliderEvent: collisions;
+                              colliderEventProperty: els;
+                              colliderEndEvent: collisions;
+                              colliderEndEventProperty: clearedEls;">
+        </a-mixin>
+      </a-assets>
+      <a-entity>
+        <a-camera positon="0 1.6 0"></a-camera>
+        <a-entity id="rhand" mixin="touch"
+                  hand-controls="hand: right">
+        </a-entity>
+        <a-entity id="lhand" mixin="touch"
+                  hand-controls="hand: left">
+        </a-entity>
+      </a-entity>
+
+      <!-- <a-entity class="card" mixin="card" position="0 0.5 -3"></a-entity> -->
+      
+      <a-entity light="type: ambient; color: #888"></a-entity>
+
+      <a-box static-body width="6" height="0.5" depth="5" color="green" position="0 0 -2"></a-box>
+
+
+
+      <script>
+        const scene = document.querySelector("a-scene");
+        carta = document.createElement("a-entity");
+
+        carta.setAttribute("class", "card");
+        carta.setAttribute("mixin", "card");
+        carta.setAttribute("position", "0 0.5 -3");
+        carta.setAttribute("src", imageArray[0]);
+
+        scene.appendChild(carta);
+      </script>
+
+
+    </a-scene>
+  </body>
+</html>
