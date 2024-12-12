@@ -11,7 +11,7 @@
 <body style="margin: 0; overflow: hidden;">
     
     <a-assets>
-        <a-asset-item id="pokemon" src="./glb/Poliwhirl.glb"></a-asset-item>
+        <a-asset-item id="pokemon" src="./glb/PoliwhirlPequeño.glb"></a-asset-item>
     </a-assets>
 
     <a-scene embedded arjs>
@@ -19,6 +19,7 @@
 
         <a-marker type="barcode" value="0">
             <a-entity gltf-model="#pokemon"></a-entity>
+            <a-box static-body width="6" height="0.5" depth="5" color="green" position="0 0 0"></a-box>
         </a-marker>
     </a-scene>
 </body>
